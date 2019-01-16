@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -15,10 +15,11 @@ export class NavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {
-    let links: { title: string, link: string, icon: string}[] = [
+  sortBy$: Subject<{ order: string, ascending: number }> = new Subject();
 
-    ];
+  constructor(private breakpointObserver: BreakpointObserver) {
 
   }
+
+
 }

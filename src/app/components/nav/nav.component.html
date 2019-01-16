@@ -1,26 +1,29 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="!(isHandset$ | async)">
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="!(isHandset$ | async)"
+               fxFlex='column'>
     <mat-toolbar>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        color="primary"
-      >
-        <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
-      </button>
       Menu
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a (click)="sortBy$.next({order:'price', ascending: -1})" mat-list-item>Sort by Price(High to Low)</a>
+      <a (click)="sortBy$.next({order:'price', ascending:1})" mat-list-item>Sort by Price(Low to high）</a>
+      <a (click)="sortBy$.next({order:'review', ascending: -1})" mat-list-item>Sort by Most Review</a>
+      <a (click)="sortBy$.next({order:'rating', ascending: -1})" mat-list-item>Sort by Best Rating</a>
     </mat-nav-list>
-
+    <button
+      (click)="drawer.toggle()"
+      aria-label="Toggle sidenav"
+      color="primary"
+      mat-icon-button
+      style="margin-top:50px"
+      type="button"
+    >
+      <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
+      Hide Nav Side Bar
+    </button>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -35,7 +38,7 @@
       <span>rsCodeChallenge</span>
     </mat-toolbar>
 
-    <app-product-page [isHandset$]="isHandset$" ></app-product-page>
+    <app-product-page [sortBy$]="sortBy$"></app-product-page>
 
 
   </mat-sidenav-content>

@@ -1,26 +1,38 @@
 <div class="container">
 
-  <mat-grid-list cols="{{(isHandset$ |async)?1:4}}" rowHeight="400px">
-    <mat-grid-tile *ngFor="let product of products" fxFlex="20">
+  <div fxFill id="sort-state">
+    {{sortedMsg}}
+  </div>
 
-      <mat-card class="show-card" fxLayout="column">
-        <mat-card-title>
+  <div fxLayout="row wrap" fxLayoutAlign='space-evenly' fxLayoutGap="10px">
+    <div *ngFor="let product of showList" fxFlex="0 0 250px">
+      <mat-card class="show-card" fxLayout="column" fxLayoutAlign="space-around">
+        <img class='img' [src]="product.image" alt="Image for {{product.name}}">
+        <mat-card-subtitle>
           {{product.name}}
-        </mat-card-title>
-
-        <div> {{product.price}} </div>
-        <div class="stars">
+        </mat-card-subtitle>
+        <div> Price: {{priceFormatter(product.price)}} </div>
+        <div class="stars" fxFlex="5" fxLayout="row">
           <mat-icon *ngFor="let number of arrayGen(product.rating)">star</mat-icon>
           <mat-icon *ngFor="let number of arrayGen(5-product.rating)">star_border</mat-icon>
         </div>
+        <mat-card-actions>
+          {{product.reviewCount}}
+        </mat-card-actions>
 
-        <img class='img' [src]="product.image" alt="Image for {{product.name}}">
-        <div class="reviewCount">{{product.reviewCount}}</div>
       </mat-card>
 
-    </mat-grid-tile>
+    </div>
 
-  </mat-grid-list>
+    <div fxFlex="0 0 250px" fxLayout="column" fxLayoutAlign="space-around center">
+      <button color="primary" mat-raised-button>
+        Show more products
+      </button>
+    </div>
+
+
+    <div *ngFor="let _ of arrayGen(10)" fxFlex="0 0 250px"></div>
+  </div>
 
 </div>
 
