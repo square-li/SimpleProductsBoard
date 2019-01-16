@@ -1,0 +1,26 @@
+<div class="container">
+
+  <mat-grid-list cols="{{(isHandset$ |async)?1:4}}" rowHeight="400px">
+    <mat-grid-tile *ngFor="let product of products" fxFlex="20">
+
+      <mat-card class="show-card" fxLayout="column">
+        <mat-card-title>
+          {{product.name}}
+        </mat-card-title>
+
+        <div> {{product.price}} </div>
+        <div class="stars">
+          <mat-icon *ngFor="let number of arrayGen(product.rating)">star</mat-icon>
+          <mat-icon *ngFor="let number of arrayGen(5-product.rating)">star_border</mat-icon>
+        </div>
+
+        <img class='img' [src]="product.image" alt="Image for {{product.name}}">
+        <div class="reviewCount">{{product.reviewCount}}</div>
+      </mat-card>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+</div>
+
