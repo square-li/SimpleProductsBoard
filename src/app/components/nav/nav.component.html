@@ -3,8 +3,8 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)"
-               fxFlex='column'>
-    <mat-toolbar fxLayout="row">
+  >
+    <mat-toolbar>
       Menu
     </mat-toolbar>
     <mat-nav-list>
@@ -36,15 +36,17 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span fxFlex="0 0 40">SPB</span>
+      <span fxFlex="0 0 40">Simple Products Show</span>
       <div *ngIf="dataReady" fxFlex="0 0 100px" fxFlexOffset="20" fxFlexOffset.xs="10">
         <app-search-box (results)="onSearch($event)" [data]="originalData$"></app-search-box>
       </div>
     </mat-toolbar>
 
-    <app-product-page [data]="products$" [sortBy$]="sortBy$"></app-product-page>
-
-
+    <div *ngIf="!dataReady" fxFill fxLayout="column" fxLayoutAlign="center center">
+      <span>Loading data from API</span>
+      <mat-spinner></mat-spinner>
+    </div>
+    <app-product-page *ngIf="dataReady" [data]="products$" [sortBy$]="sortBy$"></app-product-page>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

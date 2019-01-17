@@ -23,7 +23,6 @@ export class ProductPageComponent implements OnInit {
 
   productsPerPage = PRODUCTS_PER_PAGE; // How many products shown for a single page
   sortedMsg: string;
-  picsOnLoading: { [name: string]: boolean } = {};
 
   constructor(private messageService: MessageService) {
 
