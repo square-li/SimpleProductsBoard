@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rsCodeChallenge": {
+    "SimpleProductsBoard": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rsCodeChallenge",
+            "outputPath": "dist/SimpleProductsBoard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rsCodeChallenge:build"
+            "browserTarget": "SimpleProductsBoard:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "rsCodeChallenge:build:production"
+              "browserTarget": "SimpleProductsBoard:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rsCodeChallenge:build"
+            "browserTarget": "SimpleProductsBoard:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "rsCodeChallenge-e2e": {
+    "SimpleProductsBoard-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "rsCodeChallenge:serve"
+            "devServerTarget": "SimpleProductsBoard:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "rsCodeChallenge:serve:production"
+              "devServerTarget": "SimpleProductsBoard:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "rsCodeChallenge"
+  "defaultProject": "SimpleProductsBoard"
 }
