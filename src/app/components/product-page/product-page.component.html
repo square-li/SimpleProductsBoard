@@ -33,7 +33,8 @@
       <app-product-card [data]="product"></app-product-card>
     </div>
 
-    <div class="show-card" fxFlex="0 0 250px" fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="show-card" fxFlex="0 0 250px" fxLayout="column" fxLayoutAlign="space-around center"
+         style="height: 285px">
       <button (click)="showMore()" *ngIf="!(length - startIndex < productsPerPage)" color="primary" mat-raised-button>
         Show more products
       </button>

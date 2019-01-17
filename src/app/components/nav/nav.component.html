@@ -25,6 +25,7 @@
       Hide Nav Side Bar
     </button>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
       <button
@@ -37,7 +38,7 @@
       </button>
       <span fxFlex="0 0 40">rsCodeChallenge</span>
       <div *ngIf="dataReady" fxFlex="0 0 100px" fxFlexOffset="20" fxFlexOffset.xs="10">
-        <app-search-bar (results)="onSearch($event)" [data]="originalData$"></app-search-bar>
+        <app-search-box (results)="onSearch($event)" [data]="originalData$"></app-search-box>
       </div>
     </mat-toolbar>
 

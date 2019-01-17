@@ -23,7 +23,7 @@ import {
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {SearchBarComponent} from './components/search-bar/search-bar.component';
+import {SearchBoxComponent} from './components/search-bar/search-box.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DialogComponent} from './shared/components/dialog/dialog.component';
 import {ProductCardComponent} from './components/product-card/product-card.component';
@@ -34,7 +34,7 @@ import {ProductCardComponent} from './components/product-card/product-card.compo
     AppComponent,
     NavComponent,
     ProductPageComponent,
-    SearchBarComponent,
+    SearchBoxComponent,
     DialogComponent,
     ProductCardComponent,
   ],

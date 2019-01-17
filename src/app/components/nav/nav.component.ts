@@ -23,7 +23,7 @@ export class NavComponent {
   dataReady = false;
 
   constructor(private dataService: DataService, private breakpointObserver: BreakpointObserver, private cdRef: ChangeDetectorRef) {
-    dataService.fetchFakeData().subscribe(value => {
+    dataService.fetchData().subscribe(value => {
       this.originalData$.next(value);
       this.products$.next(value);
       this.dataReady = true;

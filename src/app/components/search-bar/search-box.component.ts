@@ -6,11 +6,11 @@ import {debounce, map, tap} from 'rxjs/operators';
 
 
 @Component({
-  selector: 'app-search-bar',
-  templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.css']
+  selector: 'app-search-box',
+  templateUrl: './search-box.component.html',
+  styleUrls: ['./search-box.component.css']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBoxComponent implements OnInit {
   @Input() data: Subject<Product[]>;
   @Output() results = new EventEmitter<Product[]>();
   products: Product[];
@@ -41,11 +41,12 @@ export class SearchBarComponent implements OnInit {
   searchHelper(query: Subject<string>) {
     return query.pipe(debounce(() => timer(500)), // debounce input to avoid make query too frequently
       tap(() => this.done = false),
+      tap(name => console.log(`Searching for ${name}`)),
       map(name => name.toLowerCase()),
       map(name => {
         // console.log(name, this.data);
         return this.products.filter(product =>
-          product.name.toLowerCase().startsWith(name) || product.name.toLowerCase().includes(name));
+          product.name.toLowerCase().includes(name));
       }),
       tap(() => this.done = true));
   }

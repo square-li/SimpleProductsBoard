@@ -63,13 +63,6 @@ export class ProductPageComponent implements OnInit {
     );
 
   }
-
-  priceFormatter(n: number) {
-    const int = Math.floor(n / 100);
-    const decimal = n - int * 100;
-    return `$${int}.${decimal}`;
-  }
-
   sortArray(ascending: number = 1, compareFunc?: (a: Product, b: Product) => number) {
     if (compareFunc) {
       this.products = this.products.sort((a, b) => compareFunc(a, b) * ascending);
@@ -103,10 +96,6 @@ export class ProductPageComponent implements OnInit {
    * Hide spinner when product images are loaded.
    * @param name Name of the product
    */
-  loaded(name: string) {
-    this.picsOnLoading[name] = true;
-    // console.log(name, this.picsOnLoading[name]);
-  }
 
   nextPage() {
     this.startIndex += this.productsPerPage;
