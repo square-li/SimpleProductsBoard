@@ -8,6 +8,7 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
@@ -24,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DialogComponent} from './shared/components/dialog/dialog.component';
 
 
 @NgModule({
@@ -32,7 +34,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NavComponent,
     ProductPageComponent,
     SearchBarComponent,
-
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCardModule,
     MatListModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatGridListModule,
     HttpClientModule,
     FlexLayoutModule,
@@ -54,6 +57,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatRadioModule,
     ReactiveFormsModule,
     FormsModule
+  ],
+  entryComponents: [
+    DialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

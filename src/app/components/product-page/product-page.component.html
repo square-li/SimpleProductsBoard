@@ -6,6 +6,7 @@
     <span>Showing result from {{startIndex}} to {{startIndex + productsPerPage}}</span>
   </div>
 
+
   <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
     <button (click)="goToPage(0)" [disabled]="startIndex < productsPerPage"
             mat-raised-button> First Page
@@ -25,8 +26,10 @@
     </button>
   </div>
 
+
   <div fxLayout="row wrap" fxLayoutAlign='space-between' fxLayoutGap="10px">
-    <div *ngFor="let product of showList" fxFlex="0 0 250px">
+
+    <div (click)="showDetails(product)" *ngFor="let product of showList" fxFlex="0 0 250px">
       <mat-card class="show-card" fxLayout="column" fxLayoutAlign="space-around">
         <mat-spinner *ngIf="!picsOnLoading[product.name]" class='img'></mat-spinner>
         <img (load)="loaded(product.name)" (loadeddata)="loaded(product.name)" [src]="product.image"

@@ -16,6 +16,7 @@ export class SearchBarComponent implements OnInit {
   products: Product[];
   myControl: FormControl = new FormControl('');
   query: Subject<string> = new Subject<string>();
+  done = true;
 
   constructor() {
   }
@@ -39,11 +40,13 @@ export class SearchBarComponent implements OnInit {
 
   searchHelper(query: Subject<string>) {
     return query.pipe(debounce(() => timer(500)), // debounce input to avoid make query too frequently
+      tap(() => this.done = false),
       map(name => name.toLowerCase()),
       map(name => {
         // console.log(name, this.data);
         return this.products.filter(product =>
           product.name.toLowerCase().startsWith(name) || product.name.toLowerCase().includes(name));
-      }));
+      }),
+      tap(() => this.done = true));
   }
 }

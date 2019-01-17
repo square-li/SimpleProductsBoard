@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Product} from '../../shared/models/product';
+import {MessageService} from '../../shared/services/message.service';
 
 const PRODUCTS_PER_PAGE = 20;
+
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
@@ -23,7 +25,7 @@ export class ProductPageComponent implements OnInit {
   sortedMsg: string;
   picsOnLoading: { [name: string]: boolean } = {};
 
-  constructor() {
+  constructor(private messageService: MessageService) {
 
   }
 
@@ -124,6 +126,10 @@ export class ProductPageComponent implements OnInit {
   showMore() {
     this.productsPerPage += PRODUCTS_PER_PAGE;
     this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
+  }
+
+  showDetails(product: Product) {
+    this.messageService.openDialog(product);
   }
 
   private arrayGen(num: number) {
