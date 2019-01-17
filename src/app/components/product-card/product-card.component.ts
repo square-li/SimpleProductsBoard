@@ -30,7 +30,7 @@ export class ProductCardComponent implements OnInit {
     this.loaded = true;
   }
 
-  private arrayGen(num: number) {
+  arrayGen(num: number) {
     const list = [];
     for (let i = 0; i < num; i++) {
       list.push(i);

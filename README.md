@@ -19,8 +19,7 @@ When Internet Connect is slow, a spinner will be shown to indicate that the pict
 
 
 ## Product Page
-A grid of [Product card]. Support pagination. 
-
+A grid of [Product card](#product-card). Support pagination. 
 At the bottom of the Product Page, there is a button to show more products, which could be useful to mobile phone user.
 
 ## Nav Side Bar
