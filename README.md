@@ -31,6 +31,8 @@ Search by the name of products. Letter case is insensitive.
 Return a list of products if their names contain the searching key word.
 Search results will be immediately present on the Product Page.
 
+You can also apply filter from the side bar to the search result.
+
 Performance searching only if the input stops for 500ms to avoid making query too frequently.
 
 # Installation
