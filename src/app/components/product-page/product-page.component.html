@@ -1,24 +1,24 @@
 <div class="container" fxLayout="column" fxLayoutGap="20px">
 
-  <div fxLayout="row" fxLayoutGap="1em">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" fxLayoutGap="1em">
     <span>{{sortedMsg}}</span>
     <span>Total result: {{length}}. </span>
     <span>Showing result from {{startIndex}} to {{startIndex + productsPerPage}}</span>
   </div>
 
 
-  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
+  <div fxLayout="row wrap" fxLayoutAlign.lt-xl="center" fxLayoutGap="10px">
     <button (click)="goToPage(0)" [disabled]="startIndex < productsPerPage"
             mat-raised-button> First Page
     </button>
-    <button (click)="previousPage()" [disabled]="startIndex < productsPerPage"
+    <button (click)="previousPage()" [disabled]="startIndex < productsPerPage" fxHide.xs
             mat-raised-button> Previous Page
     </button>
-    <button (click)="goToPage(page)"
+    <button (click)="goToPage(page)" fxHide.xs
             *ngFor="let page of arrayGen(totalPage)"
             [color]="startIndex >= page * productsPerPage &&  startIndex < (page+1) * productsPerPage? 'primary' : ''"
             mat-raised-button> {{page + 1}} </button>
-    <button (click)="nextPage()" [disabled]="length - startIndex < productsPerPage"
+    <button (click)="nextPage()" [disabled]="length - startIndex < productsPerPage" fxHide.xs
             mat-raised-button> Next Page
     </button>
     <button (click)="goToPage(totalPage - 1)" [disabled]="startIndex < productsPerPage"
@@ -27,31 +27,10 @@
   </div>
 
 
-  <div fxLayout="row wrap" fxLayoutAlign='space-between' fxLayoutGap="10px">
+  <div fxLayout="row wrap" fxLayoutAlign='space-around' fxLayoutGap="10px">
 
     <div (click)="showDetails(product)" *ngFor="let product of showList" fxFlex="0 0 250px">
-      <mat-card class="show-card" fxLayout="column" fxLayoutAlign="space-around">
-        <mat-spinner *ngIf="!picsOnLoading[product.name]" class='img'></mat-spinner>
-        <img (load)="loaded(product.name)" (loadeddata)="loaded(product.name)" [src]="product.image"
-             alt="Image for {{product.name}}"
-             class='img'>
-
-        <mat-card-subtitle>
-          {{product.name}}
-        </mat-card-subtitle>
-
-        <div> Price: {{priceFormatter(product.price)}} </div>
-
-        <div class="stars" fxFlex="5" fxLayout="row">
-          <mat-icon *ngFor="let number of arrayGen(product.rating)">star</mat-icon>
-          <mat-icon *ngFor="let number of arrayGen(5-product.rating)">star_border</mat-icon>
-        </div>
-        <mat-card-actions>
-          {{product.reviewCount}}
-        </mat-card-actions>
-
-      </mat-card>
-
+      <app-product-card [data]="product"></app-product-card>
     </div>
 
     <div class="show-card" fxFlex="0 0 250px" fxLayout="column" fxLayoutAlign="space-around center">

@@ -13,6 +13,7 @@ export class MessageService {
 
   openDialog(product: Product): void {
     const dialogRef = this.dialog.open(DialogComponent, {
+      minHeight: 600,
       data: product
     });
   }

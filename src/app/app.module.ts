@@ -26,6 +26,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DialogComponent} from './shared/components/dialog/dialog.component';
+import {ProductCardComponent} from './components/product-card/product-card.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {DialogComponent} from './shared/components/dialog/dialog.component';
     ProductPageComponent,
     SearchBarComponent,
     DialogComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

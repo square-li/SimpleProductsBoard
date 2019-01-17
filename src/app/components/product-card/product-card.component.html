@@ -1,0 +1,38 @@
+<mat-card class="show-card" fxLayout="column" fxLayoutAlign="space-around">
+  <mat-card-title *ngIf="large">
+    {{product.name}}
+  </mat-card-title>
+  <div fxLayout="center center">
+    <mat-spinner *ngIf="!loaded" [diameter]="large?200:163" class='img'></mat-spinner>
+  </div>
+  <img (load)="onLoad(product.name)" *ngIf="!large"
+       [src]="product.image"
+       alt="Image for {{product.name}}" class='img-sm'
+  >
+  <img (load)="onLoad(product.name)" *ngIf="large" [src]="product.image"
+       alt="Image for {{product.name}}"
+       class='img-lg' fxFill="0 1"
+  >
+  <mat-card-subtitle>
+    {{product.name}}
+  </mat-card-subtitle>
+
+  <div> Price: {{priceFormatter(product.price)}} </div>
+
+  <div class="stars" fxFlex="5" fxLayout="row">
+    <mat-icon *ngFor="let _ of arrayGen(product.rating)">star</mat-icon>
+    <mat-icon *ngFor="let _ of arrayGen(5-product.rating)">star_border</mat-icon>
+  </div>
+
+
+  <span *ngIf="large">
+     {{product.description}}
+  </span>
+
+
+  <div>
+    Reviews: {{product.reviewCount}}
+  </div>
+
+</mat-card>
+
