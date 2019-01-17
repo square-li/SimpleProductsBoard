@@ -17,27 +17,29 @@
       (click)="drawer.toggle()"
       aria-label="Toggle sidenav"
       color="primary"
-      mat-icon-button
+      mat-button
       style="margin-top:50px"
       type="button"
     >
       <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
-      Hide Nav Side Bar
+      Hide
     </button>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span fxFlex="0 0 40">Simple Products Show</span>
-      <div *ngIf="dataReady" fxFlex="0 0 100px" fxFlexOffset="20" fxFlexOffset.xs="10">
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button
+          (click)="drawer.toggle()"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          type="button"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>SPB</span>
+      </div>
+      <div *ngIf="dataReady">
         <app-search-box (results)="onSearch($event)" [data]="originalData$"></app-search-box>
       </div>
     </mat-toolbar>
