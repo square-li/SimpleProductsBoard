@@ -9,7 +9,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule).then(value => {
+platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
   document.getElementById('preloader').hidden = true;
 })
   .catch(err => console.error(err));

@@ -1,4 +1,4 @@
-import {RawData, RawDataSet} from './interfaces';
+import {RawData} from './interfaces';
 
 export class Product {
   name: string;

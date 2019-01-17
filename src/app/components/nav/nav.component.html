@@ -4,7 +4,7 @@
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)"
                fxFlex='column'>
-    <mat-toolbar>
+    <mat-toolbar fxLayout="row">
       Menu
     </mat-toolbar>
     <mat-nav-list>
@@ -36,9 +36,12 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>rsCodeChallenge</span>
+      <div *ngIf="dataReady" style="margin-left: 50px">
+        <app-search-bar (results)="onSearch($event)" [data]="originalData$"></app-search-bar>
+      </div>
     </mat-toolbar>
 
-    <app-product-page [sortBy$]="sortBy$"></app-product-page>
+    <app-product-page [data]="products$" [sortBy$]="sortBy$"></app-product-page>
 
 
   </mat-sidenav-content>

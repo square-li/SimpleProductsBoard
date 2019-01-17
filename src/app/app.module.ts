@@ -8,22 +8,31 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatButtonModule,
   MatCardModule,
+  MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
+  MatInputModule,
   MatListModule,
   MatProgressSpinnerModule,
+  MatRadioModule,
+  MatSelectModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {SearchBarComponent} from './components/search-bar/search-bar.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     ProductPageComponent,
+    SearchBarComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -35,10 +44,16 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatIconModule,
     MatCardModule,
     MatListModule,
+    MatFormFieldModule,
     MatGridListModule,
     HttpClientModule,
     FlexLayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

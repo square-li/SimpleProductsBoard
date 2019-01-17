@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Product} from '../../shared/models/product';
-import {DataService} from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-product-page',
@@ -12,30 +11,30 @@ import {DataService} from '../../shared/services/data.service';
 export class ProductPageComponent implements OnInit {
 
   @Input() sortBy$: Subject<{ order: string, ascending: number }>;
-
-  products: Product[]; // List of all of the products
+  @Input('data') data: Subject<Product[]>;
   showList: Product[]; // List of currently shown products
 
+  products: Product[];
   length = 0;
+  totalPage = 0;
   startIndex: number;
 
   productsPerPage = 20; // How many products shown for a single page
   sortedMsg: string;
   picsOnLoading: { [name: string]: boolean } = {};
 
-  constructor(private data: DataService) {
+  constructor() {
+
   }
 
   ngOnInit() {
-    // Fetch data from API
-    this.data.fetchFakeData().subscribe(
-      value => {
-        this.products = value;
-        this.length = this.products.length;
-        this.startIndex = 0;
-        this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
-      }
-    );
+    this.data.subscribe(value => {
+      this.products = value;
+      this.length = this.products.length;
+      this.startIndex = 0;
+      this.totalPage = Math.ceil(this.length / this.productsPerPage);
+      this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
+    });
 
     // Init array states
     this.sortedMsg = 'Sort by default order';
@@ -92,7 +91,7 @@ export class ProductPageComponent implements OnInit {
 
   sortByRatingComparator(a: Product, b: Product): number {
     if (a.rating === b.rating) {
-      return a.price - b.price;
+      return b.price - a.price;
     } else {
       return a.rating - b.rating;
     }
@@ -104,7 +103,7 @@ export class ProductPageComponent implements OnInit {
    */
   loaded(name: string) {
     this.picsOnLoading[name] = true;
-    console.log(name, this.picsOnLoading[name]);
+    // console.log(name, this.picsOnLoading[name]);
   }
 
   nextPage() {

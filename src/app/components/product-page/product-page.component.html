@@ -4,7 +4,9 @@
     {{sortedMsg}}
   </div>
 
-  <div> Total result: {{}}</div>
+  <div fxFill id="page-state"> Total result: {{length}}. Total page {{totalPage}}. Showing result from {{startIndex}}
+    to {{startIndex + productsPerPage}}.
+  </div>
 
   <div fxLayout="row wrap" fxLayoutAlign='space-evenly' fxLayoutGap="10px">
     <div *ngFor="let product of showList" fxFlex="0 0 250px">
