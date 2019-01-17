@@ -27,6 +27,8 @@ import {SearchBoxComponent} from './components/search-bar/search-box.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DialogComponent} from './shared/components/dialog/dialog.component';
 import {ProductCardComponent} from './components/product-card/product-card.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import {ProductCardComponent} from './components/product-card/product-card.compo
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   entryComponents: [
     DialogComponent,
