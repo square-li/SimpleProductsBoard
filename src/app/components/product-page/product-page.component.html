@@ -4,14 +4,22 @@
     {{sortedMsg}}
   </div>
 
+  <div> Total result: {{}}</div>
+
   <div fxLayout="row wrap" fxLayoutAlign='space-evenly' fxLayoutGap="10px">
     <div *ngFor="let product of showList" fxFlex="0 0 250px">
       <mat-card class="show-card" fxLayout="column" fxLayoutAlign="space-around">
-        <img class='img' [src]="product.image" alt="Image for {{product.name}}">
+        <mat-spinner *ngIf="!picsOnLoading[product.name]" class='img'></mat-spinner>
+        <img (load)="loaded(product.name)" (loadeddata)="loaded(product.name)" [src]="product.image"
+             alt="Image for {{product.name}}"
+             class='img'>
+
         <mat-card-subtitle>
           {{product.name}}
         </mat-card-subtitle>
+
         <div> Price: {{priceFormatter(product.price)}} </div>
+
         <div class="stars" fxFlex="5" fxLayout="row">
           <mat-icon *ngFor="let number of arrayGen(product.rating)">star</mat-icon>
           <mat-icon *ngFor="let number of arrayGen(5-product.rating)">star_border</mat-icon>

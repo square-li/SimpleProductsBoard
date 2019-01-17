@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -10,9 +10,9 @@ import {map} from 'rxjs/operators';
 })
 export class NavComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(min-width:930px)')
     .pipe(
-      map(result => result.matches)
+      map(result => !result.matches)
     );
 
   sortBy$: Subject<{ order: string, ascending: number }> = new Subject();

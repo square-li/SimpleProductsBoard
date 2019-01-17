@@ -12,26 +12,35 @@ import {DataService} from '../../shared/services/data.service';
 export class ProductPageComponent implements OnInit {
 
   @Input() sortBy$: Subject<{ order: string, ascending: number }>;
-  products: Product[];
+
+  products: Product[]; // List of all of the products
+  showList: Product[]; // List of currently shown products
+
   length = 0;
-  showList: Product[];
-  start: number;
-  productsPerPage = 100;
+  startIndex: number;
+
+  productsPerPage = 20; // How many products shown for a single page
   sortedMsg: string;
+  picsOnLoading: { [name: string]: boolean } = {};
 
   constructor(private data: DataService) {
   }
 
   ngOnInit() {
+    // Fetch data from API
     this.data.fetchFakeData().subscribe(
       value => {
         this.products = value;
         this.length = this.products.length;
-        this.start = 0;
-        this.showList = this.products.slice(this.start, this.start + this.productsPerPage);
+        this.startIndex = 0;
+        this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
       }
     );
+
+    // Init array states
     this.sortedMsg = 'Sort by default order';
+
+    // Observe sorting operations sent from outside
     this.sortBy$.subscribe(
       value => {
         const functions = {
@@ -39,24 +48,19 @@ export class ProductPageComponent implements OnInit {
           review: this.sortByReviewComparator,
           rating: this.sortByRatingComparator,
         };
-
+        // Sort array according to the instruction
         if (['price', 'review', 'rating'].findIndex(order => value.order === order) >= 0) {
           const order = value.ascending < 0 ? 'High to low' : 'Low to High';
           this.sortedMsg = `Sort by ${value.order}` + `(${order})`;
           this.sortArray(value.ascending, functions[value.order]);
-          this.start = 0;
-          this.showList = this.products.slice(this.start, this.start + this.productsPerPage);
+          this.startIndex = 0;
+          this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
         } else {
-          throw Error('Invalid order' + value.order);
+          throw Error('Invalid order ' + value.order);
         }
       }
     );
 
-  }
-
-
-  arrayGen(num: number) {
-    return Array(num);
   }
 
   priceFormatter(n: number) {
@@ -73,6 +77,11 @@ export class ProductPageComponent implements OnInit {
     }
   }
 
+  /**
+   * Comparators
+   * @param a First product
+   * @param b Second product
+   */
   sortByPriceComparator(a: Product, b: Product): number {
     return a.price - b.price;
   }
@@ -88,4 +97,29 @@ export class ProductPageComponent implements OnInit {
       return a.rating - b.rating;
     }
   }
+
+  /**
+   * Hide spinner when product images are loaded.
+   * @param name Name of the product
+   */
+  loaded(name: string) {
+    this.picsOnLoading[name] = true;
+    console.log(name, this.picsOnLoading[name]);
+  }
+
+  nextPage() {
+    this.startIndex += this.productsPerPage;
+    this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
+  }
+
+  perviousPage() {
+    this.startIndex -= this.productsPerPage;
+    this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
+  }
+
+  private arrayGen(num: number) {
+    return Array(num);
+  }
+
+
 }
