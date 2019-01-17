@@ -121,7 +121,7 @@ export class ProductPageComponent implements OnInit {
     this.messageService.openDialog(product);
   }
 
-  private arrayGen(num: number) {
+  arrayGen(num: number) {
     const list = [];
     for (let i = 0; i < num; i++) {
       list.push(i);
