@@ -27,19 +27,23 @@ export class SearchBarComponent implements OnInit {
     });
     this.myControl.valueChanges.subscribe(
       () => {
-        console.log(this.myControl.value);
-        this.query.next(this.myControl.value);
+        if (this.myControl.value === '') {
+          this.results.emit(this.products);
+        } else {
+          this.query.next(this.myControl.value);
+        }
       }
     );
   }
 
 
   searchHelper(query: Subject<string>) {
-    return query.pipe(debounce(() => timer(1000)), // debounce input to avoid make query too frequently
+    return query.pipe(debounce(() => timer(500)), // debounce input to avoid make query too frequently
       map(name => name.toLowerCase()),
       map(name => {
         // console.log(name, this.data);
-        return this.products.filter(product => product.name.toLowerCase().startsWith(name));
+        return this.products.filter(product =>
+          product.name.toLowerCase().startsWith(name) || product.name.toLowerCase().includes(name));
       }));
   }
 }

@@ -2,12 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Product} from '../../shared/models/product';
 
+const PRODUCTS_PER_PAGE = 20;
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
-
 export class ProductPageComponent implements OnInit {
 
   @Input() sortBy$: Subject<{ order: string, ascending: number }>;
@@ -19,7 +19,7 @@ export class ProductPageComponent implements OnInit {
   totalPage = 0;
   startIndex: number;
 
-  productsPerPage = 20; // How many products shown for a single page
+  productsPerPage = PRODUCTS_PER_PAGE; // How many products shown for a single page
   sortedMsg: string;
   picsOnLoading: { [name: string]: boolean } = {};
 
@@ -37,7 +37,7 @@ export class ProductPageComponent implements OnInit {
     });
 
     // Init array states
-    this.sortedMsg = 'Sort by default order';
+    this.sortedMsg = 'Sort by default order.';
 
     // Observe sorting operations sent from outside
     this.sortBy$.subscribe(
@@ -111,13 +111,27 @@ export class ProductPageComponent implements OnInit {
     this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
   }
 
-  perviousPage() {
+  previousPage() {
     this.startIndex -= this.productsPerPage;
     this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
   }
 
+  goToPage(n: number) {
+    this.startIndex = n * this.productsPerPage;
+    this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
+  }
+
+  showMore() {
+    this.productsPerPage += PRODUCTS_PER_PAGE;
+    this.showList = this.products.slice(this.startIndex, this.startIndex + this.productsPerPage);
+  }
+
   private arrayGen(num: number) {
-    return Array(num);
+    const list = [];
+    for (let i = 0; i < num; i++) {
+      list.push(i);
+    }
+    return list;
   }
 
 

@@ -1,14 +1,31 @@
-<div class="container">
+<div class="container" fxLayout="column" fxLayoutGap="20px">
 
-  <div fxFill id="sort-state">
-    {{sortedMsg}}
+  <div fxLayout="row" fxLayoutGap="1em">
+    <span>{{sortedMsg}}</span>
+    <span>Total result: {{length}}. </span>
+    <span>Showing result from {{startIndex}} to {{startIndex + productsPerPage}}</span>
   </div>
 
-  <div fxFill id="page-state"> Total result: {{length}}. Total page {{totalPage}}. Showing result from {{startIndex}}
-    to {{startIndex + productsPerPage}}.
+  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
+    <button (click)="goToPage(0)" [disabled]="startIndex < productsPerPage"
+            mat-raised-button> First Page
+    </button>
+    <button (click)="previousPage()" [disabled]="startIndex < productsPerPage"
+            mat-raised-button> Previous Page
+    </button>
+    <button (click)="goToPage(page)"
+            *ngFor="let page of arrayGen(totalPage)"
+            [color]="startIndex >= page * productsPerPage &&  startIndex < (page+1) * productsPerPage? 'primary' : ''"
+            mat-raised-button> {{page + 1}} </button>
+    <button (click)="nextPage()" [disabled]="length - startIndex < productsPerPage"
+            mat-raised-button> Next Page
+    </button>
+    <button (click)="goToPage(totalPage - 1)" [disabled]="startIndex < productsPerPage"
+            mat-raised-button> Last Page
+    </button>
   </div>
 
-  <div fxLayout="row wrap" fxLayoutAlign='space-evenly' fxLayoutGap="10px">
+  <div fxLayout="row wrap" fxLayoutAlign='space-between' fxLayoutGap="10px">
     <div *ngFor="let product of showList" fxFlex="0 0 250px">
       <mat-card class="show-card" fxLayout="column" fxLayoutAlign="space-around">
         <mat-spinner *ngIf="!picsOnLoading[product.name]" class='img'></mat-spinner>
@@ -34,9 +51,13 @@
 
     </div>
 
-    <div fxFlex="0 0 250px" fxLayout="column" fxLayoutAlign="space-around center">
-      <button color="primary" mat-raised-button>
+    <div class="show-card" fxFlex="0 0 250px" fxLayout="column" fxLayoutAlign="space-around center">
+      <button (click)="showMore()" *ngIf="!(length - startIndex < productsPerPage)" color="primary" mat-raised-button>
         Show more products
+      </button>
+
+      <button *ngIf="length - startIndex < productsPerPage" color="primary" mat-raised-button>
+        No more products
       </button>
     </div>
 

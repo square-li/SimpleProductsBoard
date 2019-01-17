@@ -26,7 +26,7 @@
     </button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -35,8 +35,8 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>rsCodeChallenge</span>
-      <div *ngIf="dataReady" style="margin-left: 50px">
+      <span fxFlex="0 0 40">rsCodeChallenge</span>
+      <div *ngIf="dataReady" fxFlex="0 0 100px" fxFlexOffset="20" fxFlexOffset.xs="10">
         <app-search-bar (results)="onSearch($event)" [data]="originalData$"></app-search-bar>
       </div>
     </mat-toolbar>
